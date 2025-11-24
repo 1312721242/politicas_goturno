@@ -1,10 +1,12 @@
 {
     "name": "politicas-goturno",
     "version": "1.0.0",
+    "type": "module",
+    "main": "server.js",
     "scripts": {
-        "start": "static-serve ."
+        "start": "node server.js"
     },
     "dependencies": {
-        "static-serve": "latest"
+        "express": "^4.21.2"
     }
 }
