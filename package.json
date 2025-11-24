@@ -1,0 +1,10 @@
+{
+    "name": "politicas-goturno",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "static-serve ."
+    },
+    "dependencies": {
+        "static-serve": "latest"
+    }
+}
