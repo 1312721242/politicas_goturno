@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes y Precios – GoTurno</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #0A0F1C;
+            margin: 0;
+            color: #fff;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #020617;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #020617;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 1px solid #1e293b;
+        }
+
+        .card h2 {
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: #22d3ee;
+        }
+
+        .description {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            color: #cbd5f5;
+        }
+
+        .price {
+            font-size: 32px;
+            margin: 10px 0;
+        }
+
+        .sub_price {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 18px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            color: #cbd5f5;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .note {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #9ca3af;
+            margin-top: 40px;
+        }
+
+        a {
+            color: #22d3ee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Planes de Suscripción GoTurno</h1>
+        <p>Plataforma SaaS para la gestión de establecimientos y reservas</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Plan Estándar -->
+        <div class="card">
+            <h2>Estándar</h2>
+            <p class="description">
+                Hasta 2 colaboradores y 1 establecimiento.
+                Incluye un mes gratis.
+            </p>
+
+            <p class="price">$9.99 USD / mes</p>
+            <p class="sub_price">$49.99 USD / 6 meses</p>
+            <p class="sub_price">$89.99 USD / año</p>
+
+            <ul>
+                <li>✔ Agenda y reservas</li>
+                <li>✔ 2 colaboradores</li>
+                <li>✔ 1 establecimiento</li>
+                <li>✔ Panel administrativo</li>
+                <li>✔ Notificaciones básicas</li>
+            </ul>
+
+            <p class="note">Puedes cancelar la suscripción en cualquier momento.</p>
+        </div>
+
+        <!-- Plan Platinium -->
+        <div class="card">
+            <h2>Platinium</h2>
+            <p class="description">
+                Hasta 5 colaboradores y 1 establecimiento.
+            </p>
+
+            <p class="price">$19.99 USD / mes</p>
+            <p class="sub_price">$109.99 USD / 6 meses</p>
+            <p class="sub_price">$209.99 USD / año</p>
+
+            <ul>
+                <li>✔ Agenda y reservas</li>
+                <li>✔ 5 colaboradores</li>
+                <li>✔ 1 establecimiento</li>
+                <li>✔ Panel administrativo</li>
+            </ul>
+
+            <p class="note">Puedes cancelar la suscripción en cualquier momento.</p>
+        </div>
+
+        <!-- Plan Golden -->
+        <div class="card">
+            <h2>Golden</h2>
+            <p class="description">
+                Hasta 10 colaboradores y 2 establecimientos.
+            </p>
+
+            <p class="price">$29.99 USD / mes</p>
+            <p class="sub_price">$159.99 USD / 6 meses</p>
+            <p class="sub_price">$299.99 USD / año</p>
+
+            <ul>
+                <li>✔ Agenda y reservas</li>
+                <li>✔ 10 colaboradores</li>
+                <li>✔ Hasta 2 establecimientos</li>
+                <li>✔ Panel administrativo</li>
+            </ul>
+
+            <p class="note">Puedes cancelar la suscripción en cualquier momento.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        Los pagos corresponden únicamente a la suscripción del propietario del establecimiento
+        para usar el software GoTurno. Los usuarios finales no realizan pagos dentro de la app.
+        El procesamiento de pagos de suscripción se realiza de forma segura a través de Paddle.
+        <br><br>
+        © 2025 GoTurno — PORTOSYSTEMS S.A.S.
+    </footer>
+
+</body>
+
+</html>
