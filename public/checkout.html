@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GoTurno — Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-[#0A0F1C] text-white min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full px-6 text-center">
+      <h1 class="text-3xl font-bold text-teal-300">GoTurno</h1>
+      <p class="text-gray-300 mt-2">Abriendo checkout seguro…</p>
+
+      <div id="status" class="mt-6 text-gray-200"></div>
+
+      <div class="mt-6 text-xs text-gray-500 break-all">
+        <div>_ptxn: <span id="_ptxn"></span></div>
+      </div>
+    </div>
+
+    <script>
+      const statusEl = document.getElementById("status");
+      const ptxnEl = document.getElementById("_ptxn");
+
+      const params = new URLSearchParams(window.location.search);
+      const txn = params.get("_ptxn");
+      ptxnEl.textContent = txn || "(vacío)";
+
+      function setStatus(msg) {
+        statusEl.textContent = msg;
+      }
+
+      if (!txn) {
+        setStatus("Falta el parámetro _ptxn en la URL. Vuelve e intenta nuevamente.");
+        throw new Error("Missing _ptxn");
+      }
+
+      // Cargar Paddle.js
+      const s = document.createElement("script");
+      s.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
+      s.async = true;
+
+      s.onload = () => {
+        try {
+          setStatus("Inicializando Paddle…");
+
+          // ✅ IMPORTANTE:
+          // Para Billing v2 necesitas inicializar con tu client-side token.
+          // Ejemplo (ajusta con tu token real):
+          // Paddle.Initialize({ token: "YOUR_CLIENT_SIDE_TOKEN" });
+
+          // Si no inicializas, no va a abrir.
+          if (!window.Paddle || !window.Paddle.Initialize) {
+            setStatus("Paddle.js cargó, pero no se encontró Paddle.Initialize.");
+            return;
+          }
+
+          // ⚠️ DESCOMENTA y coloca tu token real:
+          // window.Paddle.Initialize({ token: "TU_CLIENT_SIDE_TOKEN_AQUI" });
+
+          if (!window.Paddle.Checkout || !window.Paddle.Checkout.open) {
+            setStatus("Paddle inicializó, pero no existe Paddle.Checkout.open.");
+            return;
+          }
+
+          setStatus("Abriendo checkout…");
+          window.Paddle.Checkout.open({
+            transactionId: txn,
+          });
+
+        } catch (e) {
+          console.error(e);
+          setStatus("No se pudo abrir el checkout. Revisa consola / token.");
+        }
+      };
+
+      s.onerror = () => setStatus("No se pudo cargar Paddle.js");
+
+      document.body.appendChild(s);
+    </script>
+  </body>
+</html>
