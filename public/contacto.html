@@ -1,66 +1,201 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacto — GoTurno</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto — GoTurno</title>
+  <meta name="description" content="Contacto y soporte GoTurno. Escríbenos para asistencia técnica, suscripciones y consultas comerciales." />
+  <meta name="theme-color" content="#0A0F1C" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root { --gt-bg:#0A0F1C; --gt-teal:#4DE7C8; --gt-blue:#4C7DFF; }
+    html { scroll-behavior:smooth; }
+
+    .glass {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .glow {
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.06),
+        0 30px 80px rgba(0,0,0,.55);
+    }
+    .bg-grid {
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(77,231,200,.20) 0, rgba(77,231,200,0) 40%),
+        radial-gradient(circle at 90% 15%, rgba(76,125,255,.20) 0, rgba(76,125,255,0) 38%),
+        radial-gradient(circle at 50% 95%, rgba(77,231,200,.14) 0, rgba(77,231,200,0) 45%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 18%),
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: auto, auto, auto, auto, 26px 26px;
+      background-position: center;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid rgba(77,231,200,.9);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+  </style>
 </head>
 
-<body class="bg-[#0A0F1C] text-white">
+<body class="bg-[var(--gt-bg)] text-white antialiased">
+  <div class="fixed inset-0 -z-10 bg-grid opacity-90"></div>
 
-    <header class="py-6 text-center">
-        <a href="/" class="text-teal-300 font-bold text-3xl">GoTurno</a>
-    </header>
+  <!-- Top Nav -->
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mt-4 glass glow rounded-2xl px-5 py-3 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center">
+            <span class="font-black tracking-tight text-[var(--gt-teal)]">GT</span>
+          </div>
+          <div class="leading-tight">
+            <div class="font-extrabold tracking-tight">GoTurno</div>
+            <div class="text-xs text-white/60">Soporte · Suscripciones · Comercial</div>
+          </div>
+        </a>
 
-    <section class="max-w-3xl mx-auto px-6 mt-10">
+        <nav class="hidden md:flex items-center gap-6 text-sm text-white/70">
+          <a href="/" class="hover:text-white">Inicio</a>
+          <a href="/precios.html" class="hover:text-white">Precios</a>
+          <a href="/privacidad.html" class="hover:text-white">Privacidad</a>
+          <a href="/terminos.html" class="hover:text-white">Términos</a>
+        </nav>
 
-        <h1 class="text-4xl font-bold text-center mb-6">Contacto</h1>
+        <div class="flex items-center gap-3">
+          <a href="mailto:portosystemssas@gmail.com"
+             class="inline-flex px-4 py-2 rounded-xl bg-[var(--gt-teal)] text-black font-extrabold text-sm hover:opacity-95">
+            Escribir a soporte
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-        <p class="text-gray-300 text-center mb-10">
-            Si necesitas asistencia, suscripciones, soporte técnico o información comercial, estamos disponibles para
-            ayudarte.
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-6 pt-14 pb-8">
+    <div class="glass glow rounded-[28px] p-8 md:p-10">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/75">
+          <span class="h-2 w-2 rounded-full bg-[var(--gt-teal)]"></span>
+          Respuesta por correo (prioridad alta)
+        </div>
+
+        <h1 class="mt-4 text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
+          Contacto y soporte
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--gt-teal)] to-[var(--gt-blue)]">
+            GoTurno
+          </span>
+        </h1>
+
+        <p class="mt-4 text-white/70 text-lg leading-relaxed">
+          Si necesitas asistencia, suscripciones, soporte técnico o información comercial,
+          estamos disponibles para ayudarte.
         </p>
 
-        <div class="bg-[#111827] rounded-xl p-8 shadow-xl border border-gray-700">
-
-            <h2 class="text-2xl font-bold mb-4 text-teal-300">Datos de contacto</h2>
-
-            <p class="text-gray-300 mb-4">
-                📧 <strong>Email de soporte:</strong><br>
-                <a href="mailto:portosystemssas@gmail.com" class="text-teal-300 hover:underline">
-                    portosystemssas@gmail.com
-                </a>
-            </p>
-
-            <p class="text-gray-300 mb-4">
-                🏢 <strong>Empresa:</strong><br>
-                PORTOSYSTEMS S.A.S.
-            </p>
-
-            <p class="text-gray-300 mb-4">
-                📍 <strong>Ubicación:</strong><br>
-                Portoviejo, Manabí, Ecuador
-            </p>
-
-            <p class="text-gray-300 mb-4">
-                🕒 <strong>Horario de atención:</strong><br>
-                Lunes a Viernes, 09:00 – 18:00
-            </p>
-
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a href="mailto:portosystemssas@gmail.com"
+             class="inline-flex justify-center items-center px-5 py-3 rounded-2xl bg-[var(--gt-teal)] text-black font-extrabold hover:opacity-95">
+            portosystemssas@gmail.com
+          </a>
+          <a href="/privacidad.html"
+             class="inline-flex justify-center items-center px-5 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 font-semibold">
+            Política de privacidad
+          </a>
         </div>
-    </section>
 
-    <footer class="mt-20 pb-10 text-center text-gray-400">
-        <p>© 2025 GoTurno — PORTOSYSTEMS S.A.S.</p>
-        <div class="mt-4">
-            <a href="/" class="mr-4">Inicio</a>
-            <a href="/privacidad.html" class="mr-4">Política de privacidad</a>
-            <a href="/terminos.html">Términos de servicio</a>
+        <p class="mt-5 text-xs text-white/50 leading-relaxed">
+          Para solicitudes sobre datos personales (acceso, rectificación o eliminación), escribe a este mismo correo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Card -->
+  <section class="mx-auto max-w-6xl px-6 pb-12">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 glass glow rounded-[24px] p-7">
+        <h2 class="text-2xl md:text-3xl font-black tracking-tight">Datos de contacto</h2>
+        <p class="mt-2 text-white/70">
+          Canal oficial para soporte, facturación de suscripciones y consultas comerciales.
+        </p>
+
+        <div class="mt-6 grid sm:grid-cols-2 gap-4">
+          <div class="glass rounded-2xl p-5">
+            <div class="text-sm text-white/60">Email de soporte</div>
+            <a class="mt-2 block font-extrabold text-[var(--gt-teal)] hover:underline"
+               href="mailto:portosystemssas@gmail.com">
+              portosystemssas@gmail.com
+            </a>
+          </div>
+
+          <div class="glass rounded-2xl p-5">
+            <div class="text-sm text-white/60">Empresa responsable</div>
+            <div class="mt-2 font-extrabold">PORTOSYSTEMS S.A.S.</div>
+          </div>
+
+          <div class="glass rounded-2xl p-5">
+            <div class="text-sm text-white/60">Ubicación</div>
+            <div class="mt-2 font-semibold">Portoviejo, Manabí, Ecuador</div>
+          </div>
+
+          <div class="glass rounded-2xl p-5">
+            <div class="text-sm text-white/60">Horario de atención</div>
+            <div class="mt-2 font-semibold">Lunes a Viernes · 09:00 – 18:00</div>
+          </div>
         </div>
-    </footer>
 
+        <div class="mt-6 glass rounded-2xl p-5 text-sm text-white/70 leading-relaxed">
+          <strong class="text-white">Tip:</strong> Incluye en tu correo el asunto “Soporte GoTurno” y, si aplica,
+          tu correo de cuenta, ciudad y una breve descripción del problema (con captura).
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="glass glow rounded-[24px] p-7">
+        <h3 class="text-xl font-black tracking-tight">Enlaces rápidos</h3>
+        <div class="mt-4 space-y-3 text-sm text-white/75">
+          <a class="block px-4 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10"
+             href="/precios.html">Planes y precios</a>
+          <a class="block px-4 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10"
+             href="/terminos.html">Términos de servicio</a>
+          <a class="block px-4 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10"
+             href="/privacidad.html">Política de privacidad</a>
+          <a class="block px-4 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10"
+             href="/reembolsos.html">Reembolsos</a>
+        </div>
+
+        <div class="mt-6 text-xs text-white/50 leading-relaxed">
+          Si tienes un tema de suscripción, incluye el nombre del plan y fecha aproximada del cobro (si aplica).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="pb-12">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="glass rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <div class="font-extrabold">GoTurno</div>
+          <div class="text-sm text-white/60 mt-1">Soporte oficial y contacto.</div>
+          <div class="text-xs text-white/40 mt-3">© 2026 GoTurno — PORTOSYSTEMS S.A.S. Todos los derechos reservados.</div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-sm text-white/70">
+          <a href="/" class="hover:text-white">Inicio</a>
+          <a href="/precios.html" class="hover:text-white">Precios</a>
+          <a href="/privacidad.html" class="hover:text-white">Privacidad</a>
+          <a href="/terminos.html" class="hover:text-white">Términos</a>
+          <a href="/privacy.html" class="hover:text-white">Privacy (EN)</a>
+          <a href="mailto:portosystemssas@gmail.com" class="hover:text-white">Email</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
-
 </html>

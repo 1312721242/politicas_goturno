@@ -1,187 +1,325 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planes y Precios – GoTurno</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planes y Precios – GoTurno</title>
+  <meta name="description" content="Planes GoTurno para negocios: agenda, reservas, colaboradores y establecimientos. Suscripciones SaaS con pagos procesados por Paddle." />
+  <meta name="theme-color" content="#0A0F1C" />
 
-    <style>
-        body {
-            font-family: "Segoe UI", sans-serif;
-            background: #0A0F1C;
-            margin: 0;
-            color: #fff;
-        }
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #020617;
-        }
-
-        header h1 {
-            margin-bottom: 10px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: #020617;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            border: 1px solid #1e293b;
-        }
-
-        .card h2 {
-            font-size: 26px;
-            margin-bottom: 8px;
-            color: #22d3ee;
-        }
-
-        .description {
-            font-size: 15px;
-            opacity: 0.9;
-            margin-top: -10px;
-            margin-bottom: 20px;
-            color: #cbd5f5;
-        }
-
-        .price {
-            font-size: 32px;
-            margin: 10px 0;
-        }
-
-        .sub_price {
-            font-size: 18px;
-            opacity: 0.8;
-            margin-bottom: 18px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-            color: #cbd5f5;
-            line-height: 1.8;
-            font-size: 15px;
-        }
-
-        .note {
-            margin-top: 25px;
-            font-size: 13px;
-            color: #94a3b8;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            color: #9ca3af;
-            margin-top: 40px;
-        }
-
-        a {
-            color: #22d3ee;
-        }
-    </style>
+  <style>
+    :root { --gt-bg:#0A0F1C; --gt-teal:#4DE7C8; --gt-blue:#4C7DFF; --gt-card:#06102A; }
+    html { scroll-behavior:smooth; }
+    .glass {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .glow {
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.06),
+        0 30px 80px rgba(0,0,0,.55);
+    }
+    .badge {
+      background: linear-gradient(90deg, rgba(77,231,200,.18), rgba(76,125,255,.18));
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .priceCard {
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      will-change: transform;
+    }
+    .priceCard:hover {
+      transform: translateY(-6px);
+      border-color: rgba(77,231,200,.35);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.08),
+        0 35px 90px rgba(0,0,0,.65);
+    }
+    .featured {
+      border-color: rgba(77,231,200,.50) !important;
+      box-shadow:
+        0 0 0 1px rgba(77,231,200,.18),
+        0 40px 110px rgba(0,0,0,.70);
+    }
+    .bg-grid {
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(77,231,200,.20) 0, rgba(77,231,200,0) 40%),
+        radial-gradient(circle at 90% 15%, rgba(76,125,255,.20) 0, rgba(76,125,255,0) 38%),
+        radial-gradient(circle at 50% 95%, rgba(77,231,200,.14) 0, rgba(77,231,200,0) 45%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 18%),
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: auto, auto, auto, auto, 26px 26px;
+      background-position: center;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid rgba(77,231,200,.9);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-[var(--gt-bg)] text-white antialiased">
+  <div class="fixed inset-0 -z-10 bg-grid opacity-90"></div>
 
-    <header>
-        <h1>Planes de Suscripción GoTurno</h1>
-        <p>Plataforma SaaS para la gestión de establecimientos y reservas</p>
-    </header>
+  <!-- Top Nav -->
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mt-4 glass glow rounded-2xl px-5 py-3 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center">
+            <span class="font-black tracking-tight text-[var(--gt-teal)]">GT</span>
+          </div>
+          <div class="leading-tight">
+            <div class="font-extrabold tracking-tight">GoTurno</div>
+            <div class="text-xs text-white/60">Planes · Suscripciones · Negocios</div>
+          </div>
+        </a>
 
-    <div class="container">
+        <nav class="hidden md:flex items-center gap-6 text-sm text-white/70">
+          <a href="/" class="hover:text-white">Inicio</a>
+          <a href="/privacidad.html" class="hover:text-white">Privacidad</a>
+          <a href="/terminos.html" class="hover:text-white">Términos</a>
+          <a href="/contacto.html" class="hover:text-white">Contacto</a>
+        </nav>
 
-        <!-- Plan Estándar -->
-        <div class="card">
-            <h2>Estándar</h2>
-            <p class="description">
-                Hasta 2 colaboradores y 1 establecimiento.
-                Incluye un mes gratis.
-            </p>
+        <div class="flex items-center gap-3">
+          <a href="#planes" class="inline-flex px-4 py-2 rounded-xl bg-[var(--gt-teal)] text-black font-extrabold text-sm hover:opacity-95">
+            Ver planes
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-            <p class="price">$9.99 USD / mes</p>
-            <p class="sub_price">$49.99 USD / 6 meses</p>
-            <p class="sub_price">$89.99 USD / año</p>
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-6 pt-14 pb-8">
+    <div class="glass glow rounded-[28px] p-8 md:p-10">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full badge text-xs text-white/75">
+            <span class="h-2 w-2 rounded-full bg-[var(--gt-teal)]"></span>
+            Suscripción SaaS para establecimientos
+          </div>
+          <h1 class="mt-4 text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
+            Planes diseñados para
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--gt-teal)] to-[var(--gt-blue)]">
+              operar mejor
+            </span>
+            y vender más.
+          </h1>
+          <p class="mt-4 text-white/70 text-lg leading-relaxed">
+            Elige el plan según tu equipo y número de establecimientos.
+            Controla agenda, servicios, colaboradores y reservas en un solo lugar.
+          </p>
 
-            <ul>
-                <li>✔ Agenda y reservas</li>
-                <li>✔ 2 colaboradores</li>
-                <li>✔ 1 establecimiento</li>
-                <li>✔ Panel administrativo</li>
-                <li>✔ Notificaciones básicas</li>
-            </ul>
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <a href="#planes" class="inline-flex justify-center items-center px-5 py-3 rounded-2xl bg-[var(--gt-teal)] text-black font-extrabold hover:opacity-95">
+              Comparar planes
+            </a>
+            <a href="/contacto.html" class="inline-flex justify-center items-center px-5 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 font-semibold">
+              Hablar con soporte
+            </a>
+          </div>
 
-            <p class="note">Puedes cancelar la suscripción en cualquier momento.</p>
+          <p class="mt-5 text-xs text-white/50 leading-relaxed">
+            Nota: Los usuarios finales no pagan por reservar en la app. Los cobros corresponden únicamente a la suscripción del Negocio.
+          </p>
         </div>
 
-        <!-- Plan Platinium -->
-        <div class="card">
-            <h2>Platinium</h2>
-            <p class="description">
-                Hasta 5 colaboradores y 1 establecimiento.
-            </p>
-
-            <p class="price">$19.99 USD / mes</p>
-            <p class="sub_price">$109.99 USD / 6 meses</p>
-            <p class="sub_price">$209.99 USD / año</p>
-
-            <ul>
-                <li>✔ Agenda y reservas</li>
-                <li>✔ 5 colaboradores</li>
-                <li>✔ 1 establecimiento</li>
-                <li>✔ Panel administrativo</li>
-                <li>✔ Notificaciones básicas</li>
-            </ul>
-
-            <p class="note">Puedes cancelar la suscripción en cualquier momento.</p>
+        <!-- Quick highlights -->
+        <div class="w-full lg:w-[420px] grid grid-cols-1 gap-4">
+          <div class="glass rounded-2xl p-5">
+            <div class="text-sm font-extrabold">Incluye</div>
+            <div class="mt-2 text-sm text-white/70 space-y-2">
+              <div class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Agenda y reservas</div>
+              <div class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Gestión de colaboradores</div>
+              <div class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Panel administrativo</div>
+              <div class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Notificaciones básicas</div>
+            </div>
+          </div>
+          <div class="glass rounded-2xl p-5">
+            <div class="text-sm font-extrabold">Pagos</div>
+            <div class="mt-2 text-sm text-white/70 leading-relaxed">
+              Los pagos de suscripción se procesan de forma segura mediante <strong class="text-white">Paddle</strong>.
+              GoTurno no almacena datos completos de tarjetas ni códigos de seguridad.
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Plan Golden -->
-        <div class="card">
-            <h2>Golden</h2>
-            <p class="description">
-                Hasta 10 colaboradores y 2 establecimientos.
-            </p>
-
-            <p class="price">$29.99 USD / mes</p>
-            <p class="sub_price">$159.99 USD / 6 meses</p>
-            <p class="sub_price">$299.99 USD / año</p>
-
-            <ul>
-                <li>✔ Agenda y reservas</li>
-                <li>✔ 10 colaboradores</li>
-                <li>✔ Hasta 2 establecimientos</li>
-                <li>✔ Panel administrativo</li>
-                <li>✔ Notificaciones básicas</li>
-            </ul>
-
-            <p class="note">Puedes cancelar la suscripción en cualquier momento.</p>
-        </div>
-
+  <!-- Pricing -->
+  <section id="planes" class="mx-auto max-w-6xl px-6 pt-10 pb-10">
+    <div class="flex items-end justify-between gap-6 flex-wrap">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight">Planes y precios</h2>
+        <p class="mt-2 text-white/70">Precios referenciales en USD. Cancelas cuando quieras.</p>
+      </div>
+      <div class="text-xs text-white/50">
+        * Los montos pueden incluir impuestos según normativa aplicable.
+      </div>
     </div>
 
-    <footer>
-        Los pagos corresponden únicamente a la suscripción del propietario del establecimiento
-        para usar el software GoTurno. Los usuarios finales no realizan pagos dentro de la app.
-        El procesamiento de pagos de suscripción se realiza de forma segura a través de Paddle.
-        <br><br>
-        © 2025 GoTurno — PORTOSYSTEMS S.A.S.
-    </footer>
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Estándar -->
+      <div class="priceCard rounded-[24px] p-7">
+        <div class="flex items-center justify-between">
+          <h3 class="text-2xl font-black text-[var(--gt-teal)]">Estándar</h3>
+          <span class="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-white/70">
+            1 mes gratis
+          </span>
+        </div>
+        <p class="mt-2 text-white/70 text-sm">
+          Ideal para comenzar. Hasta <strong class="text-white">2 colaboradores</strong> y <strong class="text-white">1 establecimiento</strong>.
+        </p>
 
+        <div class="mt-6">
+          <div class="text-4xl font-black">$9.99 <span class="text-sm text-white/60 font-semibold">/mes</span></div>
+          <div class="mt-2 text-sm text-white/65">
+            <div>$49.99 / 6 meses</div>
+            <div>$89.99 / año</div>
+          </div>
+        </div>
+
+        <div class="mt-6 border-t border-white/10 pt-6">
+          <ul class="space-y-3 text-sm text-white/75">
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Agenda y reservas</li>
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>2 colaboradores</li>
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>1 establecimiento</li>
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Panel administrativo</li>
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Notificaciones básicas</li>
+          </ul>
+
+          <p class="mt-6 text-xs text-white/50">Puedes cancelar la suscripción en cualquier momento.</p>
+
+          <a href="/contacto.html"
+             class="mt-6 inline-flex w-full justify-center px-5 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 font-semibold">
+            Elegir Estándar
+          </a>
+        </div>
+      </div>
+
+      <!-- Platinium (destacado) -->
+      <div class="priceCard featured rounded-[24px] p-7 relative overflow-hidden">
+        <div class="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-[rgba(77,231,200,.18)] blur-2xl"></div>
+        <div class="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-[rgba(76,125,255,.18)] blur-2xl"></div>
+
+        <div class="relative">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-black text-[var(--gt-teal)]">Platinium</h3>
+            <span class="px-3 py-1 rounded-full bg-[var(--gt-teal)] text-black text-xs font-extrabold">
+              Recomendado
+            </span>
+          </div>
+
+          <p class="mt-2 text-white/70 text-sm">
+            Para equipos en crecimiento. Hasta <strong class="text-white">5 colaboradores</strong> y <strong class="text-white">1 establecimiento</strong>.
+          </p>
+
+          <div class="mt-6">
+            <div class="text-4xl font-black">$19.99 <span class="text-sm text-white/60 font-semibold">/mes</span></div>
+            <div class="mt-2 text-sm text-white/65">
+              <div>$109.99 / 6 meses</div>
+              <div>$209.99 / año</div>
+            </div>
+          </div>
+
+          <div class="mt-6 border-t border-white/10 pt-6">
+            <ul class="space-y-3 text-sm text-white/75">
+              <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Agenda y reservas</li>
+              <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>5 colaboradores</li>
+              <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>1 establecimiento</li>
+              <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Panel administrativo</li>
+              <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Notificaciones básicas</li>
+            </ul>
+
+            <p class="mt-6 text-xs text-white/50">Puedes cancelar la suscripción en cualquier momento.</p>
+
+            <a href="/contacto.html"
+               class="mt-6 inline-flex w-full justify-center px-5 py-3 rounded-2xl bg-[var(--gt-teal)] text-black font-extrabold hover:opacity-95">
+              Elegir Platinium
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Golden -->
+      <div class="priceCard rounded-[24px] p-7">
+        <div class="flex items-center justify-between">
+          <h3 class="text-2xl font-black text-[var(--gt-teal)]">Golden</h3>
+          <span class="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-white/70">
+            Más capacidad
+          </span>
+        </div>
+        <p class="mt-2 text-white/70 text-sm">
+          Para operación robusta. Hasta <strong class="text-white">10 colaboradores</strong> y <strong class="text-white">2 establecimientos</strong>.
+        </p>
+
+        <div class="mt-6">
+          <div class="text-4xl font-black">$29.99 <span class="text-sm text-white/60 font-semibold">/mes</span></div>
+          <div class="mt-2 text-sm text-white/65">
+            <div>$159.99 / 6 meses</div>
+            <div>$299.99 / año</div>
+          </div>
+        </div>
+
+        <div class="mt-6 border-t border-white/10 pt-6">
+          <ul class="space-y-3 text-sm text-white/75">
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Agenda y reservas</li>
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>10 colaboradores</li>
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Hasta 2 establecimientos</li>
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Panel administrativo</li>
+            <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Notificaciones básicas</li>
+          </ul>
+
+          <p class="mt-6 text-xs text-white/50">Puedes cancelar la suscripción en cualquier momento.</p>
+
+          <a href="/contacto.html"
+             class="mt-6 inline-flex w-full justify-center px-5 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 font-semibold">
+            Elegir Golden
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compliance / Notes -->
+    <div class="mt-10 glass rounded-2xl p-6 text-sm text-white/70 leading-relaxed">
+      <div class="font-extrabold text-white mb-2">Transparencia</div>
+      <p>
+        Los pagos corresponden únicamente a la <strong class="text-white">suscripción del propietario del establecimiento</strong>
+        para usar el software GoTurno. Los usuarios finales no realizan pagos dentro de la app por reservas.
+        El procesamiento de pagos de suscripción se realiza de forma segura a través de <strong class="text-white">Paddle</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="pb-12">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="glass rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <div class="font-extrabold">GoTurno</div>
+          <div class="text-sm text-white/60 mt-1">Planes y suscripciones para negocios.</div>
+          <div class="text-xs text-white/40 mt-3">© 2026 GoTurno — PORTOSYSTEMS S.A.S. Todos los derechos reservados.</div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-sm text-white/70">
+          <a href="/" class="hover:text-white">Inicio</a>
+          <a href="/privacidad.html" class="hover:text-white">Privacidad</a>
+          <a href="/terminos.html" class="hover:text-white">Términos</a>
+          <a href="/reembolsos.html" class="hover:text-white">Reembolsos</a>
+          <a href="/contacto.html" class="hover:text-white">Contacto</a>
+          <a href="/privacy.html" class="hover:text-white">Privacy (EN)</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
-
 </html>

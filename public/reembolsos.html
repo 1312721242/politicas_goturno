@@ -1,117 +1,479 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Reembolsos – GoTurno</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Reembolsos – GoTurno</title>
+  <meta name="description" content="Política de Reembolsos de GoTurno para suscripciones SaaS de negocios. Condiciones, plazos y proceso de solicitud." />
+  <meta name="theme-color" content="#0A0F1C" />
 
-    <style>
-        body {
-            font-family: "Segoe UI", sans-serif;
-            background: #f5f7fb;
-            margin: 0;
-        }
+  <style>
+    :root{
+      --bg:#0A0F1C;
+      --panel:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.10);
+      --text:#e5e7eb;
+      --muted:rgba(229,231,235,.72);
+      --muted2:rgba(229,231,235,.55);
+      --brand:#4DE7C8;
+      --brand2:#4C7DFF;
+      --warn:#FBBF24;
+      --danger:#FB7185;
+      --shadow: 0 30px 90px rgba(0,0,0,.60);
+      --shadow2: 0 10px 30px rgba(0,0,0,.45);
+      --radius: 22px;
+      --radius2: 18px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
 
-        header {
-            background: #004987;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
 
-        header img {
-            width: 160px;
-        }
+    /* Background grid + glow */
+    .bg{
+      position:fixed; inset:0; z-index:-1;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(77,231,200,.22) 0, rgba(77,231,200,0) 40%),
+        radial-gradient(circle at 90% 15%, rgba(76,125,255,.22) 0, rgba(76,125,255,0) 38%),
+        radial-gradient(circle at 50% 95%, rgba(77,231,200,.16) 0, rgba(77,231,200,0) 45%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 18%),
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size:auto, auto, auto, auto, 26px 26px;
+      background-position:center;
+      opacity:.95;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            background: white;
-            padding: 50px;
-            border-radius: 14px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
-            line-height: 1.8;
-        }
+    /* Top bar */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px 18px 0;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .topbar{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none; color: var(--text);
+    }
+    .logoBox{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--stroke);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 900;
+      letter-spacing: -.3px;
+      color: var(--brand);
+    }
+    .brandText{ line-height:1.1; }
+    .brandText b{ display:block; font-size: 14px; }
+    .brandText span{ display:block; font-size: 12px; color: var(--muted2); margin-top: 2px; }
 
-        h2 {
-            color: #004987;
-            margin-top: 25px;
-        }
+    nav{
+      display:flex; gap: 14px; flex-wrap:wrap;
+      font-size: 13px;
+    }
+    nav a{
+      color: var(--muted);
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    nav a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #666;
-        }
-    </style>
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0b1220;
+      text-decoration:none;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      box-shadow: 0 14px 35px rgba(0,0,0,.45);
+      white-space:nowrap;
+    }
+    .cta:hover{ opacity: .95; }
+
+    /* Hero */
+    .heroWrap{ padding: 22px 18px 0; }
+    .hero{
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: calc(var(--radius) + 6px);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      position: relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width: 320px; height: 320px;
+      background: rgba(77,231,200,.18);
+      filter: blur(60px);
+      border-radius: 999px;
+      pointer-events:none;
+    }
+    .hero:after{
+      content:"";
+      position:absolute; inset:auto auto -140px -140px;
+      width: 360px; height: 360px;
+      background: rgba(76,125,255,.18);
+      filter: blur(70px);
+      border-radius: 999px;
+      pointer-events:none;
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .dot{
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(77,231,200,.14);
+    }
+    h1{
+      margin: 6px 0 8px;
+      font-size: clamp(28px, 4.2vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 860px;
+    }
+    .metaRow{
+      margin-top: 14px;
+      display:flex; gap: 10px; flex-wrap:wrap;
+    }
+    .chip{
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    /* Content */
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (min-width: 980px){
+      .grid{ grid-template-columns: 1fr 340px; gap: 18px; }
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding: 18px 18px;
+    }
+
+    .toc h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: -0.2px;
+    }
+    .toc a{
+      display:block;
+      text-decoration:none;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    .toc a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    h2{
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    p{ margin: 10px 0; color: var(--muted); }
+
+    ul{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style:none;
+      color: var(--muted);
+    }
+    li{
+      display:flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    li:last-child{ border-bottom:none; }
+    .bullet{
+      width: 10px; height: 10px;
+      margin-top: 7px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(77,231,200,.10);
+      flex: 0 0 10px;
+    }
+
+    .callout{
+      border-radius: var(--radius2);
+      padding: 14px 14px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .callout b{ color: var(--text); }
+
+    .callout.warn{
+      background: rgba(251,191,36,.10);
+      border-color: rgba(251,191,36,.26);
+    }
+    .callout.danger{
+      background: rgba(251,113,133,.10);
+      border-color: rgba(251,113,133,.26);
+    }
+
+    .strong{ color: var(--text); font-weight: 800; }
+
+    .contactBox a{
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 900;
+    }
+    .contactBox a:hover{ text-decoration: underline; }
+
+    footer{
+      max-width: 1100px;
+      margin: 16px auto 40px;
+      padding: 0 18px;
+      color: rgba(229,231,235,.55);
+      font-size: 12.5px;
+      text-align:center;
+    }
+
+    /* Accessibility */
+    a:focus-visible{
+      outline: 2px solid rgba(77,231,200,.9);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="bg"></div>
 
-    <header>
-        <img src="/assets/goturno_logo_blanco.png" alt="GoTurno Logo">
-        <h1>Política de Reembolsos</h1>
-        <p>Última actualización: 2025</p>
-    </header>
+  <header>
+    <div class="topbar">
+      <a class="brand" href="/">
+        <div class="logoBox">GT</div>
+        <div class="brandText">
+          <b>GoTurno</b>
+          <span>Política de Reembolsos</span>
+        </div>
+      </a>
 
-    <div class="container">
+      <nav aria-label="Navegación">
+        <a href="/precios.html">Precios</a>
+        <a href="/privacidad.html">Privacidad</a>
+        <a href="/terminos.html">Términos</a>
+        <a href="/contacto.html">Contacto</a>
+      </nav>
 
-        <h2>1. Alcance de esta política</h2>
-        <p>
-            GoTurno es una plataforma <strong>SaaS</strong> que ofrece planes de suscripción para que los propietarios
-            de establecimientos accedan a herramientas administrativas y funciones premium.
-            Los usuarios finales no realizan pagos dentro de GoTurno.
-        </p>
-
-        <h2>2. Derecho de desistimiento</h2>
-        <p>
-            En cumplimiento de los lineamientos de Paddle y de sus Buyer Terms, los propietarios de establecimientos
-            que adquieran una suscripción a GoTurno tienen derecho a solicitar un reembolso dentro de los
-            <strong>primeros 14 días</strong> posteriores a la compra inicial.
-        </p>
-
-        <p>
-            Este derecho de desistimiento aplica únicamente a la compra inicial del plan y no a renovaciones
-            posteriores.
-        </p>
-
-        <h2>3. Condiciones posteriores al período de 14 días</h2>
-        <p>
-            Una vez transcurridos los 14 días desde la compra inicial,
-            <strong>no se realizan reembolsos</strong>, excepto en casos como:
-        </p>
-        <ul>
-            <li>Cobros duplicados.</li>
-            <li>Errores técnicos verificables atribuibles al sistema de facturación.</li>
-        </ul>
-
-        <h2>4. Prueba gratuita</h2>
-        <p>
-            Antes de realizar el pago, los propietarios disponen de un <strong>mes de prueba gratuito</strong>
-            para evaluar completamente las funciones de GoTurno sin ningún costo.
-        </p>
-
-        <h2>5. Cancelación de la suscripción</h2>
-        <p>
-            Los propietarios pueden cancelar su suscripción en cualquier momento.
-            Tras la cancelación, el acceso permanecerá disponible hasta el final del período ya pagado.
-        </p>
-
-        <h2>6. Empresa responsable</h2>
-        <p>
-            Operado por: <strong>PORTOSYSTEMS S.A.S.</strong><br>
-            País: Ecuador<br>
-            Contacto: <strong>portosystemssas@gmail.com</strong>
-        </p>
-
-
+      <a class="cta" href="mailto:portosystemssas@gmail.com">Solicitar ayuda</a>
     </div>
+  </header>
 
-    <footer>
-        © 2025 GoTurno — PORTOSYSTEMS S.A.S.
-    </footer>
+  <section class="heroWrap">
+    <div class="hero">
+      <div class="kicker"><span class="dot"></span> Política aplicable a suscripciones SaaS de negocios</div>
+      <h1>Política de Reembolsos</h1>
+      <p class="sub">
+        Esta política describe el alcance, condiciones y procedimiento para solicitudes de reembolso relacionadas con planes de suscripción de GoTurno.
+      </p>
 
+      <div class="metaRow">
+        <div class="chip"><span class="strong">Última actualización:</span> 17-feb-2026</div>
+        <div class="chip"><span class="strong">Empresa:</span> PORTOSYSTEMS S.A.S. (Ecuador)</div>
+        <div class="chip"><span class="strong">Email:</span> portosystemssas@gmail.com</div>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <div class="grid">
+      <!-- Main content -->
+      <article class="card" aria-label="Contenido principal">
+        <section id="alcance">
+          <h2>1. Alcance de esta política</h2>
+          <p>
+            GoTurno es una plataforma <span class="strong">SaaS</span> que ofrece planes de suscripción para que los propietarios
+            de establecimientos accedan a herramientas administrativas y funciones premium.
+            <span class="strong">Los usuarios finales no realizan pagos dentro de GoTurno</span>.
+          </p>
+
+          <div class="callout">
+            <b>Nota:</b> Esta política aplica únicamente a pagos de suscripción realizados por propietarios/administradores de establecimientos
+            para el uso del software de GoTurno.
+          </div>
+        </section>
+
+        <section id="desistimiento" style="margin-top:18px;">
+          <h2>2. Derecho de desistimiento</h2>
+          <p>
+            En cumplimiento de los lineamientos del proveedor de cobro (por ejemplo, Paddle) y sus términos para compradores,
+            los propietarios de establecimientos que adquieran una suscripción a GoTurno pueden solicitar un reembolso dentro de los
+            <span class="strong">primeros 14 días</span> posteriores a la compra inicial.
+          </p>
+          <p>
+            Este derecho aplica únicamente a la <span class="strong">compra inicial</span> del plan y no a renovaciones posteriores.
+          </p>
+
+          <div class="callout warn">
+            <b>Importante:</b> El reembolso, si procede, se procesa a través del proveedor de pago utilizado en la compra.
+          </div>
+        </section>
+
+        <section id="posterior" style="margin-top:18px;">
+          <h2>3. Condiciones posteriores al período de 14 días</h2>
+          <p>
+            Una vez transcurridos los 14 días desde la compra inicial, <span class="strong">no se realizan reembolsos</span>,
+            excepto en casos justificados como:
+          </p>
+          <ul>
+            <li><span class="bullet"></span><div>Cobros duplicados.</div></li>
+            <li><span class="bullet"></span><div>Errores técnicos verificables atribuibles al sistema de facturación.</div></li>
+          </ul>
+
+          <div class="callout danger">
+            <b>Exclusiones:</b> No se otorgarán reembolsos por falta de uso, resultados comerciales esperados, o por periodos ya consumidos,
+            salvo obligación legal aplicable o error atribuible al cobro.
+          </div>
+        </section>
+
+        <section id="prueba" style="margin-top:18px;">
+          <h2>4. Prueba gratuita</h2>
+          <p>
+            Antes de realizar el pago, los propietarios pueden disponer de un <span class="strong">periodo de prueba gratuito</span>
+            cuando esté habilitado en la app, para evaluar las funciones de GoTurno sin costo.
+          </p>
+        </section>
+
+        <section id="cancelacion" style="margin-top:18px;">
+          <h2>5. Cancelación de la suscripción</h2>
+          <p>
+            Los propietarios pueden cancelar su suscripción en cualquier momento.
+            Tras la cancelación, el acceso permanecerá disponible hasta el final del período ya pagado/en curso,
+            salvo disposición legal distinta o reglas del proveedor de pago.
+          </p>
+        </section>
+
+        <section id="proceso" style="margin-top:18px;">
+          <h2>6. Proceso para solicitar un reembolso</h2>
+          <p>Para solicitar un reembolso, envía un correo a:</p>
+          <p class="contactBox"><a href="mailto:portosystemssas@gmail.com">portosystemssas@gmail.com</a></p>
+          <p>Incluye, de ser posible:</p>
+          <ul>
+            <li><span class="bullet"></span><div><span class="strong">Correo de la cuenta</span> asociada a la suscripción.</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Fecha aproximada</span> del cobro y plan/ciclo contratado.</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Motivo</span> de la solicitud (p. ej., cobro duplicado).</div></li>
+            <li><span class="bullet"></span><div>Comprobante o referencia del pago (si aplica).</div></li>
+          </ul>
+
+          <div class="callout">
+            <b>Tiempo de respuesta:</b> procuramos responder solicitudes de soporte lo antes posible en días laborables.
+          </div>
+        </section>
+
+        <section id="empresa" style="margin-top:18px;">
+          <h2>7. Empresa responsable</h2>
+          <p>
+            Operado por: <span class="strong">PORTOSYSTEMS S.A.S.</span><br />
+            País: Ecuador<br />
+            Contacto: <span class="strong">portosystemssas@gmail.com</span>
+          </p>
+        </section>
+      </article>
+
+      <!-- TOC -->
+      <aside class="card toc" aria-label="Tabla de contenidos">
+        <h3>Contenido</h3>
+        <a href="#alcance">1. Alcance</a>
+        <a href="#desistimiento">2. Derecho de desistimiento (14 días)</a>
+        <a href="#posterior">3. Condiciones posteriores</a>
+        <a href="#prueba">4. Prueba gratuita</a>
+        <a href="#cancelacion">5. Cancelación</a>
+        <a href="#proceso">6. Proceso de solicitud</a>
+        <a href="#empresa">7. Empresa responsable</a>
+
+        <div class="callout" style="margin-top:14px;">
+          <b>Recordatorio:</b> GoTurno no intermedia pagos entre usuarios y establecimientos; esta política aplica a suscripciones SaaS de negocios.
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 GoTurno — PORTOSYSTEMS S.A.S. ·
+    <a href="/privacidad.html" style="color: rgba(77,231,200,.95); text-decoration:none;">Privacidad</a> ·
+    <a href="/terminos.html" style="color: rgba(77,231,200,.95); text-decoration:none;">Términos</a> ·
+    <a href="/contacto.html" style="color: rgba(77,231,200,.95); text-decoration:none;">Contacto</a>
+  </footer>
 </body>
-
 </html>

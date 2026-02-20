@@ -1,170 +1,496 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Términos y Condiciones – GoTurno</title>
+  <meta name="description" content="Términos y Condiciones de GoTurno (plataforma SaaS de reservas y gestión para negocios). Última actualización: 17-feb-2026." />
+  <meta name="theme-color" content="#0A0F1C" />
 
   <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f5f7fb;
-      margin: 0;
-      line-height: 1.7;
-      color: #333;
+    :root{
+      --bg:#0A0F1C;
+      --panel:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.10);
+      --text:#e5e7eb;
+      --muted:rgba(229,231,235,.72);
+      --muted2:rgba(229,231,235,.55);
+      --brand:#4DE7C8;
+      --brand2:#4C7DFF;
+      --warn:#FBBF24;
+      --danger:#FB7185;
+      --shadow: 0 30px 90px rgba(0,0,0,.60);
+      --shadow2: 0 10px 30px rgba(0,0,0,.45);
+      --radius: 22px;
+      --radius2: 18px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
 
-    header {
-      background: #004987;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
     }
 
-    header img {
-      width: 160px;
+    /* Background grid + glow */
+    .bg{
+      position:fixed; inset:0; z-index:-1;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(77,231,200,.22) 0, rgba(77,231,200,0) 40%),
+        radial-gradient(circle at 90% 15%, rgba(76,125,255,.22) 0, rgba(76,125,255,0) 38%),
+        radial-gradient(circle at 50% 95%, rgba(77,231,200,.16) 0, rgba(77,231,200,0) 45%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 18%),
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size:auto, auto, auto, auto, 26px 26px;
+      background-position:center;
+      opacity:.95;
+    }
+
+    /* Top bar */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px 18px 0;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .topbar{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none; color: var(--text);
+    }
+    .logoBox{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--stroke);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 900;
+      letter-spacing: -.3px;
+      color: var(--brand);
+    }
+    .brandText{ line-height:1.1; }
+    .brandText b{ display:block; font-size: 14px; }
+    .brandText span{ display:block; font-size: 12px; color: var(--muted2); margin-top: 2px; }
+
+    nav{
+      display:flex; gap: 14px; flex-wrap:wrap;
+      font-size: 13px;
+    }
+    nav a{
+      color: var(--muted);
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    nav a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0b1220;
+      text-decoration:none;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      box-shadow: 0 14px 35px rgba(0,0,0,.45);
+      white-space:nowrap;
+    }
+    .cta:hover{ opacity: .95; }
+
+    /* Hero */
+    .heroWrap{ padding: 22px 18px 0; }
+    .hero{
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: calc(var(--radius) + 6px);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      position: relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width: 320px; height: 320px;
+      background: rgba(77,231,200,.18);
+      filter: blur(60px);
+      border-radius: 999px;
+      pointer-events:none;
+    }
+    .hero:after{
+      content:"";
+      position:absolute; inset:auto auto -140px -140px;
+      width: 360px; height: 360px;
+      background: rgba(76,125,255,.18);
+      filter: blur(70px);
+      border-radius: 999px;
+      pointer-events:none;
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 12px;
       margin-bottom: 10px;
     }
-
-    .container {
+    .dot{
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(77,231,200,.14);
+    }
+    h1{
+      margin: 6px 0 8px;
+      font-size: clamp(28px, 4.2vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
       max-width: 900px;
-      margin: 40px auto;
-      background: white;
-      padding: 50px;
+    }
+    .metaRow{
+      margin-top: 14px;
+      display:flex; gap: 10px; flex-wrap:wrap;
+    }
+    .chip{
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    /* Content */
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (min-width: 980px){
+      .grid{ grid-template-columns: 1fr 340px; gap: 18px; }
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding: 18px 18px;
+    }
+
+    .toc h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: -0.2px;
+    }
+    .toc a{
+      display:block;
+      text-decoration:none;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 10px 12px;
       border-radius: 14px;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    .toc a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
     }
 
-    h2 {
-      color: #004987;
-      margin-top: 28px;
+    h2{
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    p{ margin: 10px 0; color: var(--muted); }
+
+    ul{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style:none;
+      color: var(--muted);
+    }
+    li{
+      display:flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    li:last-child{ border-bottom:none; }
+    .bullet{
+      width: 10px; height: 10px;
+      margin-top: 7px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(77,231,200,.10);
+      flex: 0 0 10px;
     }
 
-    ul { margin-top: 8px; }
-
-    .note {
-      background: #f0f6ff;
-      border: 1px solid rgba(0,73,135,0.18);
-      padding: 14px 16px;
-      border-radius: 12px;
+    .callout{
+      border-radius: var(--radius2);
+      padding: 14px 14px;
       margin-top: 12px;
-      color: #0c2035;
-      font-size: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .callout b{ color: var(--text); }
+    .callout.warn{ background: rgba(251,191,36,.10); border-color: rgba(251,191,36,.26); }
+    .callout.danger{ background: rgba(251,113,133,.10); border-color: rgba(251,113,133,.26); }
+
+    .strong{ color: var(--text); font-weight: 900; }
+
+    footer{
+      max-width: 1100px;
+      margin: 16px auto 40px;
+      padding: 0 18px;
+      color: rgba(229,231,235,.55);
+      font-size: 12.5px;
+      text-align:center;
     }
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #777;
-      margin-top: 40px;
-      font-size: 14px;
+    a:focus-visible{
+      outline: 2px solid rgba(77,231,200,.9);
+      outline-offset: 3px;
+      border-radius: 12px;
     }
   </style>
 </head>
 
 <body>
+  <div class="bg"></div>
+
   <header>
-    <img src="/assets/goturno_logo_blanco.png" alt="GoTurno Logo">
-    <h1>Términos y Condiciones</h1>
-    <p>Última actualización: 17-feb-2026</p>
+    <div class="topbar">
+      <a class="brand" href="/">
+        <div class="logoBox">GT</div>
+        <div class="brandText">
+          <b>GoTurno</b>
+          <span>Términos y Condiciones</span>
+        </div>
+      </a>
+
+      <nav aria-label="Navegación">
+        <a href="/precios.html">Precios</a>
+        <a href="/privacidad.html">Privacidad</a>
+        <a href="/reembolsos.html">Reembolsos</a>
+        <a href="/contacto.html">Contacto</a>
+      </nav>
+
+      <a class="cta" href="mailto:portosystemssas@gmail.com">Soporte</a>
+    </div>
   </header>
 
-  <div class="container">
+  <section class="heroWrap">
+    <div class="hero">
+      <div class="kicker"><span class="dot"></span> Plataforma tecnológica SaaS (Ecuador)</div>
+      <h1>Términos y Condiciones</h1>
+      <p class="sub">
+        Estos términos regulan el acceso y uso de la app GoTurno. Al crear una cuenta o usar la plataforma, aceptas estas condiciones.
+        Si no estás de acuerdo, no uses la app.
+      </p>
 
-    <h2>1. Introducción</h2>
-    <p>
-      Bienvenido a GoTurno. Estos Términos y Condiciones regulan el acceso y uso del software y servicios ofrecidos por GoTurno.
-      Al crear una cuenta o utilizar la plataforma, aceptas estos términos. Si no estás de acuerdo, no uses la app.
-    </p>
-
-    <h2>2. Definiciones</h2>
-    <ul>
-      <li><strong>Usuario:</strong> persona que utiliza la aplicación para explorar establecimientos y solicitar reservas.</li>
-      <li><strong>Propietario de establecimiento / Negocio:</strong> persona o empresa que administra un establecimiento dentro de GoTurno.</li>
-      <li><strong>Colaborador:</strong> personal o miembro del equipo asignado por el propietario del establecimiento.</li>
-      <li><strong>Suscripción:</strong> plan de acceso al software y herramientas administrativas de GoTurno.</li>
-      <li><strong>GoTurno:</strong> plataforma tecnológica tipo SaaS operada por PORTOSYSTEMS S.A.S.</li>
-    </ul>
-
-    <h2>3. Servicios</h2>
-    <p>
-      GoTurno es una plataforma <strong>SaaS</strong> que ofrece herramientas para la gestión de reservas, horarios, personal, agenda,
-      y visibilidad digital de establecimientos.
-    </p>
-    <p>
-      GoTurno <strong>no presta directamente</strong> los servicios de los establecimientos, <strong>no vende servicios de terceros</strong>,
-      <strong>no actúa como intermediario de pagos</strong> y no procesa transacciones entre usuarios y establecimientos.
-    </p>
-
-    <h2>4. Cuenta, veracidad y seguridad</h2>
-    <ul>
-      <li>Debes proporcionar información verídica y mantenerla actualizada.</li>
-      <li>Eres responsable de la confidencialidad de tus credenciales y de toda actividad realizada desde tu cuenta.</li>
-      <li>Podemos suspender o restringir cuentas ante indicios razonables de fraude, suplantación, abuso o riesgos de seguridad.</li>
-    </ul>
-
-    <h2>5. Reservas y responsabilidad del establecimiento</h2>
-    <p>
-      GoTurno facilita la búsqueda y reserva de servicios, pero cada establecimiento es responsable de su atención, calidad,
-      precios, políticas de cancelación, cumplimiento normativo y cualquier reclamo derivado de la prestación del servicio.
-    </p>
-
-    <h2>6. Pagos y suscripciones</h2>
-    <p>
-      Los únicos pagos asociados a GoTurno corresponden a la <strong>suscripción del propietario del establecimiento</strong> para acceder
-      a herramientas premium del software.
-    </p>
-    <p>
-      GoTurno no cobra comisiones por reservas a usuarios finales, ni participa en transacciones por servicios entre usuarios y establecimientos.
-      <strong>GoTurno no actúa como marketplace ni como facilitador de pagos entre terceros.</strong>
-    </p>
-    <p>
-      Los pagos de suscripción pueden ser procesados de forma segura a través de <strong>proveedores externos</strong> (por ejemplo, <strong>Paddle</strong>).
-      GoTurno no almacena números completos de tarjeta ni códigos de seguridad.
-    </p>
-
-    <div class="note">
-      <strong>Nota (Ecuador):</strong> Si se habilita el pago por <strong>transferencia</strong>, la activación de la suscripción puede depender de la verificación
-      del pago (manual o automática). GoTurno podrá solicitar evidencia mínima (por ejemplo comprobante, referencia, fecha y monto) únicamente para validar la transacción.
+      <div class="metaRow">
+        <div class="chip"><span class="strong">Última actualización:</span> 17-feb-2026</div>
+        <div class="chip"><span class="strong">Operador:</span> PORTOSYSTEMS S.A.S. (Ecuador)</div>
+        <div class="chip"><span class="strong">Contacto:</span> portosystemssas@gmail.com</div>
+      </div>
     </div>
+  </section>
 
-    <h2>7. Cancelación de la suscripción</h2>
-    <p>
-      Los propietarios de establecimientos pueden cancelar su suscripción en cualquier momento. El acceso permanecerá activo hasta la finalización del período ya pagado,
-      salvo disposición legal distinta o condiciones informadas en el flujo de compra.
-    </p>
+  <main class="wrap">
+    <div class="grid">
+      <article class="card" aria-label="Contenido principal">
+        <section id="intro">
+          <h2>1. Introducción</h2>
+          <p>
+            Bienvenido a GoTurno. Estos Términos y Condiciones regulan el acceso y uso del software y servicios ofrecidos por GoTurno.
+            Al crear una cuenta o utilizar la plataforma, aceptas estos términos. Si no estás de acuerdo, no uses la app.
+          </p>
+        </section>
 
-    <h2>8. Propiedad intelectual</h2>
-    <p>
-      GoTurno otorga una licencia limitada, revocable y no exclusiva para usar la app. No adquieres derechos sobre el código, base de datos, marca, diseño, algoritmos o infraestructura.
-      Está prohibida la ingeniería inversa, el scraping, la reventa o el uso para crear productos competidores.
-    </p>
+        <section id="def" style="margin-top:18px;">
+          <h2>2. Definiciones</h2>
+          <ul>
+            <li><span class="bullet"></span><div><span class="strong">Usuario:</span> persona que utiliza la aplicación para explorar establecimientos y solicitar reservas.</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Propietario de establecimiento / Negocio:</span> persona o empresa que administra un establecimiento dentro de GoTurno.</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Colaborador:</span> personal o miembro del equipo asignado por el propietario del establecimiento.</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Suscripción:</span> plan de acceso al software y herramientas administrativas de GoTurno.</div></li>
+            <li><span class="bullet"></span><div><span class="strong">GoTurno:</span> plataforma tecnológica tipo SaaS operada por PORTOSYSTEMS S.A.S.</div></li>
+          </ul>
+        </section>
 
-    <h2>9. Limitación de responsabilidad</h2>
-    <p>
-      En la máxima medida permitida por la ley, GoTurno no responde por daños indirectos, lucro cesante, pérdida de beneficios o reclamos derivados de la prestación del servicio por parte
-      de establecimientos. Cuando corresponda, la responsabilidad total de GoTurno se limita al monto efectivamente pagado a GoTurno por el usuario/negocio en los últimos 3 meses previos al reclamo.
-    </p>
+        <section id="servicios" style="margin-top:18px;">
+          <h2>3. Servicios</h2>
+          <p>
+            GoTurno es una plataforma <span class="strong">SaaS</span> que ofrece herramientas para la gestión de reservas, horarios, personal, agenda,
+            y visibilidad digital de establecimientos.
+          </p>
+          <p>
+            GoTurno <span class="strong">no presta directamente</span> los servicios de los establecimientos, <span class="strong">no vende servicios de terceros</span>,
+            <span class="strong">no actúa como intermediario de pagos</span> y no procesa transacciones entre usuarios y establecimientos.
+          </p>
 
-    <h2>10. Cambios</h2>
-    <p>
-      Podemos actualizar estos Términos y Condiciones. Si los cambios son relevantes, los informaremos dentro de la app o por medios razonables.
-      El uso continuo implica aceptación de la versión vigente.
-    </p>
+          <div class="callout">
+            <b>Relación con el establecimiento:</b> cualquier reclamo por la prestación del servicio (calidad, precios, atención, políticas de cancelación, cumplimiento normativo)
+            debe dirigirse principalmente al establecimiento.
+          </div>
+        </section>
 
-    <h2>11. Empresa responsable y contacto</h2>
-    <p>
-      Este servicio es operado por <strong>PORTOSYSTEMS S.A.S.</strong><br>
-      Ecuador<br>
-      Contacto: <strong>portosystemssas@gmail.com</strong>
-    </p>
+        <section id="cuenta" style="margin-top:18px;">
+          <h2>4. Cuenta, veracidad y seguridad</h2>
+          <ul>
+            <li><span class="bullet"></span><div>Debes proporcionar información verídica y mantenerla actualizada.</div></li>
+            <li><span class="bullet"></span><div>Eres responsable de la confidencialidad de tus credenciales y de toda actividad realizada desde tu cuenta.</div></li>
+            <li><span class="bullet"></span><div>Podemos suspender o restringir cuentas ante indicios razonables de fraude, suplantación, abuso o riesgos de seguridad.</div></li>
+          </ul>
+        </section>
 
-  </div>
+        <section id="reservas" style="margin-top:18px;">
+          <h2>5. Reservas y responsabilidad del establecimiento</h2>
+          <p>
+            GoTurno facilita la búsqueda y reserva de servicios, pero cada establecimiento es responsable de su atención, calidad,
+            precios, políticas de cancelación, cumplimiento normativo y cualquier reclamo derivado de la prestación del servicio.
+          </p>
+        </section>
+
+        <section id="pagos" style="margin-top:18px;">
+          <h2>6. Pagos y suscripciones</h2>
+          <p>
+            Los únicos pagos asociados a GoTurno corresponden a la <span class="strong">suscripción del propietario del establecimiento</span> para acceder
+            a herramientas premium del software.
+          </p>
+          <p>
+            GoTurno no cobra comisiones por reservas a usuarios finales, ni participa en transacciones por servicios entre usuarios y establecimientos.
+            <span class="strong">GoTurno no actúa como marketplace ni como facilitador de pagos entre terceros.</span>
+          </p>
+          <p>
+            Los pagos de suscripción pueden ser procesados de forma segura a través de <span class="strong">proveedores externos</span> (por ejemplo, <span class="strong">Paddle</span>).
+            GoTurno no almacena números completos de tarjeta ni códigos de seguridad.
+          </p>
+
+          <div class="callout warn">
+            <b>Nota (Ecuador):</b> Si se habilita el pago por <span class="strong">transferencia</span>, la activación de la suscripción puede depender de la verificación
+            del pago (manual o automática). GoTurno podrá solicitar evidencia mínima (por ejemplo: comprobante, referencia, fecha y monto) únicamente para validar la transacción.
+          </div>
+        </section>
+
+        <section id="cancelacion" style="margin-top:18px;">
+          <h2>7. Cancelación de la suscripción</h2>
+          <p>
+            Los propietarios de establecimientos pueden cancelar su suscripción en cualquier momento. El acceso permanecerá activo hasta la finalización del período ya pagado,
+            salvo disposición legal distinta o condiciones informadas en el flujo de compra.
+          </p>
+        </section>
+
+        <section id="pi" style="margin-top:18px;">
+          <h2>8. Propiedad intelectual</h2>
+          <p>
+            GoTurno otorga una licencia limitada, revocable y no exclusiva para usar la app. No adquieres derechos sobre el código, base de datos, marca, diseño, algoritmos o infraestructura.
+            Está prohibida la ingeniería inversa, el scraping, la reventa o el uso para crear productos competidores.
+          </p>
+        </section>
+
+        <section id="responsabilidad" style="margin-top:18px;">
+          <h2>9. Limitación de responsabilidad</h2>
+          <p>
+            En la máxima medida permitida por la ley, GoTurno no responde por daños indirectos, lucro cesante, pérdida de beneficios o reclamos derivados de la prestación del servicio por parte
+            de establecimientos. Cuando corresponda, la responsabilidad total de GoTurno se limita al monto efectivamente pagado a GoTurno por el usuario/negocio en los últimos 3 meses previos al reclamo.
+          </p>
+        </section>
+
+        <section id="cambios" style="margin-top:18px;">
+          <h2>10. Cambios</h2>
+          <p>
+            Podemos actualizar estos Términos y Condiciones. Si los cambios son relevantes, los informaremos dentro de la app o por medios razonables.
+            El uso continuo implica aceptación de la versión vigente.
+          </p>
+        </section>
+
+        <section id="contacto" style="margin-top:18px;">
+          <h2>11. Empresa responsable y contacto</h2>
+          <p>
+            Este servicio es operado por <span class="strong">PORTOSYSTEMS S.A.S.</span><br />
+            Ecuador<br />
+            Contacto: <span class="strong">portosystemssas@gmail.com</span>
+          </p>
+
+          <div class="callout">
+            <b>Soporte:</b> para consultas, puedes escribirnos a <span class="strong">portosystemssas@gmail.com</span>.
+          </div>
+        </section>
+      </article>
+
+      <aside class="card toc" aria-label="Tabla de contenidos">
+        <h3>Contenido</h3>
+        <a href="#intro">1. Introducción</a>
+        <a href="#def">2. Definiciones</a>
+        <a href="#servicios">3. Servicios</a>
+        <a href="#cuenta">4. Cuenta y seguridad</a>
+        <a href="#reservas">5. Reservas</a>
+        <a href="#pagos">6. Pagos y suscripciones</a>
+        <a href="#cancelacion">7. Cancelación</a>
+        <a href="#pi">8. Propiedad intelectual</a>
+        <a href="#responsabilidad">9. Limitación de responsabilidad</a>
+        <a href="#cambios">10. Cambios</a>
+        <a href="#contacto">11. Contacto</a>
+
+        <div class="callout" style="margin-top:14px;">
+          <b>Resumen:</b> GoTurno es software (SaaS). No es marketplace ni intermedia pagos entre usuarios y negocios.
+        </div>
+      </aside>
+    </div>
+  </main>
 
   <footer>
-    © 2026 GoTurno — PORTOSYSTEMS S.A.S.
+    © 2026 GoTurno — PORTOSYSTEMS S.A.S. ·
+    <a href="/privacidad.html" style="color: rgba(77,231,200,.95); text-decoration:none;">Privacidad</a> ·
+    <a href="/reembolsos.html" style="color: rgba(77,231,200,.95); text-decoration:none;">Reembolsos</a> ·
+    <a href="/contacto.html" style="color: rgba(77,231,200,.95); text-decoration:none;">Contacto</a>
   </footer>
 </body>
 </html>
-```

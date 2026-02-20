@@ -4,152 +4,457 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy – GoTurno</title>
+  <meta name="description" content="GoTurno Privacy Policy. Learn what data we collect, how we use it, who we share it with, and how to exercise your rights." />
+  <meta name="theme-color" content="#0A0F1C" />
 
   <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f5f7fb;
-      margin: 0;
-      color: #333;
+    :root{
+      --bg:#0A0F1C;
+      --panel:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.10);
+      --text:#e5e7eb;
+      --muted:rgba(229,231,235,.70);
+      --muted2:rgba(229,231,235,.55);
+      --brand:#4DE7C8;
+      --brand2:#4C7DFF;
+      --shadow: 0 30px 90px rgba(0,0,0,.60);
+      --shadow2: 0 10px 30px rgba(0,0,0,.45);
+      --radius: 22px;
+      --radius2: 18px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
 
-    header {
-      background: #004987;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
     }
 
-    header img {
-      width: 160px;
+    /* Background grid + glow */
+    .bg{
+      position:fixed; inset:0; z-index:-1;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(77,231,200,.22) 0, rgba(77,231,200,0) 40%),
+        radial-gradient(circle at 90% 15%, rgba(76,125,255,.22) 0, rgba(76,125,255,0) 38%),
+        radial-gradient(circle at 50% 95%, rgba(77,231,200,.16) 0, rgba(77,231,200,0) 45%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 18%),
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size:auto, auto, auto, auto, 26px 26px;
+      background-position:center;
+      opacity:.95;
+    }
+
+    /* Top bar */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px 18px 0;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .topbar{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none; color: var(--text);
+    }
+    .logoBox{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--stroke);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 900;
+      letter-spacing: -.3px;
+      color: var(--brand);
+    }
+    .brandText{ line-height:1.1; }
+    .brandText b{ display:block; font-size: 14px; }
+    .brandText span{ display:block; font-size: 12px; color: var(--muted2); margin-top: 2px; }
+
+    nav{
+      display:flex; gap: 14px; flex-wrap:wrap;
+      font-size: 13px;
+    }
+    nav a{
+      color: var(--muted);
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    nav a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0b1220;
+      text-decoration:none;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      box-shadow: 0 14px 35px rgba(0,0,0,.45);
+      white-space:nowrap;
+    }
+    .cta:hover{ opacity: .95; }
+
+    /* Hero */
+    .heroWrap{ padding: 22px 18px 0; }
+    .hero{
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: calc(var(--radius) + 6px);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      position: relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-120px -120px auto auto;
+      width: 320px; height: 320px;
+      background: rgba(77,231,200,.18);
+      filter: blur(60px);
+      border-radius: 999px;
+      pointer-events:none;
+    }
+    .hero:after{
+      content:"";
+      position:absolute; inset:auto auto -140px -140px;
+      width: 360px; height: 360px;
+      background: rgba(76,125,255,.18);
+      filter: blur(70px);
+      border-radius: 999px;
+      pointer-events:none;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 12px;
       margin-bottom: 10px;
     }
+    .dot{
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(77,231,200,.14);
+    }
+    h1{
+      margin: 6px 0 8px;
+      font-size: clamp(28px, 4.2vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 820px;
+    }
+    .metaRow{
+      margin-top: 14px;
+      display:flex; gap: 10px; flex-wrap:wrap;
+    }
+    .chip{
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
 
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: white;
-      padding: 50px;
+    /* Content */
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (min-width: 980px){
+      .grid{ grid-template-columns: 1fr 340px; gap: 18px; }
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding: 18px 18px;
+    }
+
+    .toc h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: -0.2px;
+    }
+    .toc a{
+      display:block;
+      text-decoration:none;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 10px 12px;
       border-radius: 14px;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
-      line-height: 1.7;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    .toc a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
     }
 
-    h2 {
-      color: #004987;
-      margin-top: 35px;
+    h2{
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    p{ margin: 10px 0; color: var(--muted); }
+    ul{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style:none;
+      color: var(--muted);
+    }
+    li{
+      display:flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    li:last-child{ border-bottom:none; }
+    .bullet{
+      width: 10px; height: 10px;
+      margin-top: 7px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(77,231,200,.10);
+      flex: 0 0 10px;
     }
 
-    ul {
-      margin-top: 8px;
+    .note{
+      background: rgba(77,231,200,.08);
+      border: 1px solid rgba(77,231,200,.22);
+      padding: 14px 14px;
+      border-radius: var(--radius2);
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    .note {
-      background: #f0f6ff;
-      border: 1px solid rgba(0,73,135,0.18);
-      padding: 14px 16px;
+    .strong{ color: var(--text); font-weight: 800; }
+
+    .contactBox a{
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 900;
+    }
+    .contactBox a:hover{ text-decoration: underline; }
+
+    footer{
+      max-width: 1100px;
+      margin: 16px auto 40px;
+      padding: 0 18px;
+      color: rgba(229,231,235,.55);
+      font-size: 12.5px;
+      text-align:center;
+    }
+
+    /* Accessibility */
+    a:focus-visible{
+      outline: 2px solid rgba(77,231,200,.9);
+      outline-offset: 3px;
       border-radius: 12px;
-      margin-top: 10px;
-      color: #0c2035;
-      font-size: 14px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #555;
-      font-size: 14px;
-      margin-top: 40px;
     }
   </style>
 </head>
 
 <body>
+  <div class="bg"></div>
+
   <header>
-    <img src="/assets/goturno_logo_blanco.png" alt="GoTurno Logo">
-    <h1>Privacy Policy</h1>
-    <p>Last updated: 17-Feb-2026</p>
+    <div class="topbar">
+      <a class="brand" href="/">
+        <div class="logoBox">GT</div>
+        <div class="brandText">
+          <b>GoTurno</b>
+          <span>Privacy Policy</span>
+        </div>
+      </a>
+
+      <nav aria-label="Navigation">
+        <a href="/pricing.html">Pricing</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+
+      <a class="cta" href="mailto:portosystemssas@gmail.com">Contact Support</a>
+    </div>
   </header>
 
-  <div class="container">
+  <section class="heroWrap">
+    <div class="hero">
+      <div class="kicker"><span class="dot"></span> Transparency and user control</div>
+      <h1>Privacy Policy</h1>
+      <p class="sub">
+        This policy explains what data we collect, how we use it, who we share it with, and how you can exercise your rights.
+      </p>
 
-    <h2>1. Information We Collect</h2>
-    <p>At GoTurno, we collect only the information necessary to operate the platform:</p>
-    <ul>
-      <li><strong>Account and contact data:</strong> name, email address, phone number, city and/or reference address (when the user provides it), and profile photo (if the user chooses to upload it).</li>
-      <li><strong>In-app activity:</strong> bookings, cancellations, favorites, and actions necessary for the service to function.</li>
-      <li><strong>Location:</strong> latitude and longitude <strong>only if the user grants permission</strong>, to show nearby businesses and improve the experience.</li>
-      <li><strong>Technical identifiers:</strong> minimal device technical data needed for security and for notifications to work (for example, push notification tokens).</li>
-      <li><strong>Diagnostics:</strong> error logs and technical events for support and service improvement.</li>
-    </ul>
-
-    <h2>2. Use of Information</h2>
-    <ul>
-      <li>Manage user accounts.</li>
-      <li>Enable business discovery features, bookings, and business administration.</li>
-      <li>Process business owner subscriptions through external providers (for example, Paddle).</li>
-      <li>Improve user experience, security, and fraud prevention.</li>
-      <li>Provide technical support.</li>
-    </ul>
-
-    <h2>3. Payments and Subscriptions</h2>
-    <p>
-      GoTurno <strong>does not process or manage payments between users and businesses</strong>.
-      GoTurno is not a marketplace and does not act as a financial intermediary.
-    </p>
-    <p>
-      The only payments associated with the platform correspond to the
-      <strong>business owner subscription</strong> to access the software tools
-      (SaaS model). Where applicable, charges are processed by <strong>external providers</strong>
-      (for example, <strong>Paddle</strong>).
-    </p>
-    <p>
-      GoTurno <strong>does not collect or store sensitive financial information</strong> such as full card numbers,
-      security codes, or complete banking details.
-    </p>
-
-    <div class="note">
-      <strong>Important:</strong> If payment by <strong>bank transfer</strong> (Ecuador) is enabled, GoTurno may request
-      minimal information to <strong>verify the payment</strong> (for example: receipt/proof of payment, reference, date, and amount),
-      solely to activate the subscription and prevent fraud.
+      <div class="metaRow">
+        <div class="chip"><span class="strong">Last updated:</span> 17-Feb-2026</div>
+        <div class="chip"><span class="strong">Company:</span> PORTOSYSTEMS S.A.S. (Ecuador)</div>
+        <div class="chip"><span class="strong">Email:</span> portosystemssas@gmail.com</div>
+      </div>
     </div>
+  </section>
 
-    <h2>4. Security</h2>
-    <ul>
-      <li>SSL/HTTPS encryption in communications.</li>
-      <li>Secure authentication via tokens.</li>
-      <li>Reasonable security measures and infrastructure monitoring.</li>
-    </ul>
+  <main class="wrap">
+    <div class="grid">
+      <!-- Main content -->
+      <article class="card" aria-label="Main content">
+        <section id="collect">
+          <h2>1. Information We Collect</h2>
+          <p>At GoTurno, we collect only the information necessary to operate the platform:</p>
+          <ul>
+            <li><span class="bullet"></span><div><span class="strong">Account and contact data:</span> name, email address, phone number, city and/or reference address (when the user provides it), and profile photo (if the user chooses to upload it).</div></li>
+            <li><span class="bullet"></span><div><span class="strong">In-app activity:</span> bookings, cancellations, favorites, and actions necessary for the service to function.</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Location:</span> latitude and longitude <span class="strong">only if the user grants permission</span>, to show nearby businesses and improve the experience.</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Technical identifiers:</span> minimal device technical data needed for security and for notifications to work (for example, push notification tokens).</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Diagnostics:</span> error logs and technical events for support and service improvement.</div></li>
+          </ul>
+        </section>
 
-    <h2>5. Data Sharing</h2>
-    <p>We only share data with essential providers required to operate GoTurno:</p>
-    <ul>
-      <li><strong>Paddle</strong> (business owner subscription management).</li>
-      <li><strong>Hosting and infrastructure services</strong> (operation and storage).</li>
-      <li><strong>Notification services</strong> (push notification delivery).</li>
-    </ul>
-    <p>
-      GoTurno <strong>does not sell</strong> personal data nor share it with <strong>data brokers</strong>.
-    </p>
+        <section id="use" style="margin-top:18px;">
+          <h2>2. Use of Information</h2>
+          <ul>
+            <li><span class="bullet"></span><div>Manage user accounts.</div></li>
+            <li><span class="bullet"></span><div>Enable business discovery features, bookings, and business administration.</div></li>
+            <li><span class="bullet"></span><div>Process business owner subscriptions through external providers (for example, Paddle).</div></li>
+            <li><span class="bullet"></span><div>Improve user experience, security, and fraud prevention.</div></li>
+            <li><span class="bullet"></span><div>Provide technical support.</div></li>
+          </ul>
+        </section>
 
-    <h2>6. User Rights</h2>
-    <p>
-      Users may request access, correction, update, portability, or deletion of their data,
-      in accordance with the <strong>Organic Law on Personal Data Protection of Ecuador</strong>, by writing to:
-    </p>
-    <strong>portosystemssas@gmail.com</strong>
+        <section id="payments" style="margin-top:18px;">
+          <h2>3. Payments and Subscriptions</h2>
+          <p>
+            GoTurno <span class="strong">does not process or manage payments between users and businesses</span>.
+            GoTurno is not a marketplace and does not act as a financial intermediary.
+          </p>
+          <p>
+            The only payments associated with the platform correspond to the
+            <span class="strong">business owner subscription</span> to access software tools
+            (SaaS model). Where applicable, charges are processed by <span class="strong">external providers</span>
+            (for example, <span class="strong">Paddle</span>).
+          </p>
+          <p>
+            GoTurno <span class="strong">does not collect or store sensitive financial information</span> such as full card numbers,
+            security codes, or complete banking details.
+          </p>
 
-    <h2>7. Responsible Entity</h2>
-    <p>
-      This platform is operated by <strong>PORTOSYSTEMS S.A.S.</strong><br>
-      Country: Ecuador<br>
-      Contact: <strong>portosystemssas@gmail.com</strong>
-    </p>
+          <div class="note">
+            <span class="strong">Important:</span> If payment by <span class="strong">bank transfer</span> (Ecuador) is enabled, GoTurno may request
+            minimal information to <span class="strong">verify the payment</span> (for example: proof of payment, reference, date, and amount),
+            solely to activate the subscription and prevent fraud.
+          </div>
+        </section>
 
-  </div>
+        <section id="security" style="margin-top:18px;">
+          <h2>4. Security</h2>
+          <ul>
+            <li><span class="bullet"></span><div>SSL/HTTPS encryption in communications.</div></li>
+            <li><span class="bullet"></span><div>Secure authentication via tokens.</div></li>
+            <li><span class="bullet"></span><div>Reasonable security measures and infrastructure monitoring.</div></li>
+          </ul>
+        </section>
+
+        <section id="sharing" style="margin-top:18px;">
+          <h2>5. Data Sharing</h2>
+          <p>We only share data with essential providers required to operate GoTurno:</p>
+          <ul>
+            <li><span class="bullet"></span><div><span class="strong">Paddle</span> (business owner subscription management).</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Hosting and infrastructure services</span> (operation and storage).</div></li>
+            <li><span class="bullet"></span><div><span class="strong">Notification services</span> (push notification delivery).</div></li>
+          </ul>
+          <p>
+            GoTurno <span class="strong">does not sell</span> personal data nor share it with <span class="strong">data brokers</span>.
+          </p>
+        </section>
+
+        <section id="rights" style="margin-top:18px;">
+          <h2>6. User Rights</h2>
+          <p>
+            Users may request access, correction, update, portability, or deletion of their data,
+            in accordance with the <span class="strong">Organic Law on Personal Data Protection of Ecuador</span>, by writing to:
+          </p>
+          <p class="contactBox"><a href="mailto:portosystemssas@gmail.com">portosystemssas@gmail.com</a></p>
+        </section>
+
+        <section id="entity" style="margin-top:18px;">
+          <h2>7. Responsible Entity</h2>
+          <p>
+            This platform is operated by <span class="strong">PORTOSYSTEMS S.A.S.</span><br />
+            Country: Ecuador<br />
+            Contact: <span class="strong">portosystemssas@gmail.com</span>
+          </p>
+        </section>
+      </article>
+
+      <!-- TOC -->
+      <aside class="card toc" aria-label="Table of contents">
+        <h3>Contents</h3>
+        <a href="#collect">1. Information We Collect</a>
+        <a href="#use">2. Use of Information</a>
+        <a href="#payments">3. Payments and Subscriptions</a>
+        <a href="#security">4. Security</a>
+        <a href="#sharing">5. Data Sharing</a>
+        <a href="#rights">6. User Rights</a>
+        <a href="#entity">7. Responsible Entity</a>
+
+        <div class="note" style="margin-top:14px;">
+          <span class="strong">Tip:</span> When requesting data, include your account email and a brief description of your request.
+        </div>
+      </aside>
+    </div>
+  </main>
 
   <footer>
-    © 2026 GoTurno — PORTOSYSTEMS S.A.S.
+    © 2026 GoTurno — PORTOSYSTEMS S.A.S. ·
+    <a href="/terms.html" style="color: rgba(77,231,200,.95); text-decoration:none;">Terms</a> ·
+    <a href="/contact.html" style="color: rgba(77,231,200,.95); text-decoration:none;">Contact</a>
   </footer>
 </body>
 </html>
