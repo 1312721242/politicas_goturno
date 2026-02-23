@@ -38,3 +38,12 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
+
+app.get("/eliminar-cuenta", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "eliminar-cuenta.html"));
+});
+
+// (Opcional) con slash final
+app.get("/eliminar-cuenta/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "eliminar-cuenta.html"));
+});

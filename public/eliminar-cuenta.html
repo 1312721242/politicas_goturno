@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GoTurno — Eliminación de Cuenta y Datos</title>
+  <meta name="description" content="GoTurno: solicita la eliminación de tu cuenta y datos asociados. Pasos claros, datos eliminados y retención." />
+  <meta name="theme-color" content="#0A0F1C" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root { --gt-bg:#0A0F1C; --gt-teal:#4DE7C8; --gt-blue:#4C7DFF; }
+    html { scroll-behavior:smooth; }
+
+    .glass {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .glow {
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.06),
+        0 30px 80px rgba(0,0,0,.55);
+    }
+    .bg-grid {
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(77,231,200,.20) 0, rgba(77,231,200,0) 40%),
+        radial-gradient(circle at 90% 20%, rgba(76,125,255,.22) 0, rgba(76,125,255,0) 38%),
+        radial-gradient(circle at 50% 90%, rgba(77,231,200,.16) 0, rgba(77,231,200,0) 42%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 18%),
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: auto, auto, auto, auto, 26px 26px;
+      background-position: center;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid rgba(77,231,200,.9);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body class="bg-[var(--gt-bg)] text-white antialiased">
+  <!-- Background -->
+  <div class="fixed inset-0 -z-10 bg-grid opacity-90"></div>
+
+  <!-- Top bar -->
+  <header class="sticky top-0 z-50">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mt-4 glass glow rounded-2xl px-5 py-3 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center">
+            <span class="font-black tracking-tight text-[var(--gt-teal)]">GT</span>
+          </div>
+          <div class="leading-tight">
+            <div class="font-extrabold tracking-tight">GoTurno</div>
+            <div class="text-xs text-white/60">Reservas · Gestión · Suscripciones</div>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm text-white/70">
+          <a href="/privacidad.html" class="hover:text-white">Privacidad</a>
+          <a href="/terminos.html" class="hover:text-white">Términos</a>
+          <a href="/contacto.html" class="hover:text-white">Contacto</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="/contacto.html"
+             class="hidden sm:inline-flex px-4 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-sm font-semibold">
+            Soporte
+          </a>
+          <a href="/"
+             class="inline-flex px-4 py-2 rounded-xl bg-[var(--gt-teal)] text-black font-extrabold text-sm hover:opacity-95">
+            Volver
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-6 pt-14 pb-8">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-white/70">
+          <span class="h-2 w-2 rounded-full bg-[var(--gt-teal)]"></span>
+          Cuenta y datos · Account & Data Deletion
+        </div>
+
+        <h1 class="mt-4 text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
+          Eliminación de cuenta y datos en
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--gt-teal)] to-[var(--gt-blue)]">
+            GoTurno
+          </span>
+        </h1>
+
+        <p class="mt-5 text-white/70 text-lg leading-relaxed max-w-xl">
+          Esta página explica cómo solicitar la eliminación de tu cuenta de GoTurno y los datos asociados.
+          También detalla qué información se elimina y qué podría conservarse por motivos legales o de seguridad.
+        </p>
+
+        <div class="mt-6 glass rounded-2xl p-5 text-white/70 text-sm">
+          <strong class="text-white">For Google Play reviewers:</strong>
+          This page provides clear steps to request account deletion, specifies deleted/retained data, and retention periods.
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -inset-6 rounded-[32px] bg-gradient-to-r from-[rgba(77,231,200,.22)] to-[rgba(76,125,255,.22)] blur-2xl"></div>
+        <div class="relative glass glow rounded-[32px] p-6">
+          <div class="text-sm text-white/65">
+            <div class="font-extrabold text-white">URL oficial de eliminación</div>
+            <div class="mt-2 text-white/70 break-all">
+              https://app.goturno.online/eliminar-cuenta
+            </div>
+            <div class="mt-4 text-xs text-white/50">
+              Última actualización: <span id="lastUpdated"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="mx-auto max-w-6xl px-6 pt-6 pb-10 space-y-10">
+    <!-- Steps -->
+    <div class="glass glow rounded-[28px] p-7 md:p-8">
+      <h2 class="text-2xl md:text-3xl font-black tracking-tight">Cómo solicitar la eliminación</h2>
+      <p class="mt-3 text-white/70 text-base md:text-lg leading-relaxed max-w-3xl">
+        Para eliminar tu cuenta y datos asociados, envía una solicitud usando el correo de soporte.
+      </p>
+
+      <div class="mt-6 grid md:grid-cols-2 gap-5">
+        <div class="glass rounded-2xl p-6">
+          <div class="font-extrabold">Paso 1: Enviar solicitud</div>
+          <ul class="mt-3 space-y-2 text-white/70 text-sm leading-relaxed">
+            <li>• Email a: <span class="font-semibold text-white">portosystemssas@gmail.com</span></li>
+            <li>• Asunto: <span class="font-semibold text-white">GoTurno - Delete my account</span></li>
+            <li>• Incluye: correo de la cuenta, nombre completo y (si aplica) nombre del negocio.</li>
+          </ul>
+
+          <a
+            class="mt-5 inline-flex justify-center items-center px-5 py-3 rounded-2xl bg-[var(--gt-teal)] text-black font-extrabold hover:opacity-95 w-full sm:w-auto"
+            href="mailto:soporte@appgoturno.online?subject=GoTurno%20-%20Delete%20my%20account&body=Hello%20GoTurno%20Support,%0A%0AI%20request%20to%20delete%20my%20GoTurno%20account%20and%20associated%20data.%0A%0AAccount%20email:%20%0AFull%20name:%20%0ABusiness%20name%20(if%20any):%20%0A%0AThank%20you."
+          >
+            Enviar correo de eliminación
+          </a>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <div class="font-extrabold">Paso 2: Validación y confirmación</div>
+          <ul class="mt-3 space-y-2 text-white/70 text-sm leading-relaxed">
+            <li>• Podemos solicitar verificación básica para evitar eliminaciones no autorizadas.</li>
+            <li>• Confirmaremos la recepción y el estado del proceso por correo.</li>
+            <li>• Tiempo máximo de procesamiento: <span class="font-semibold text-white">hasta 30 días</span>.</li>
+          </ul>
+
+          <div class="mt-5 text-xs text-white/50 leading-relaxed">
+            Nota: si necesitas eliminar solo parte de tus datos (p. ej., teléfono o dirección),
+            indícalo claramente en el correo.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What gets deleted / retained -->
+    <div class="grid lg:grid-cols-2 gap-8">
+      <div class="glass glow rounded-[28px] p-7 md:p-8">
+        <h2 class="text-2xl font-black tracking-tight">Datos que se eliminan</h2>
+        <p class="mt-3 text-white/70 leading-relaxed">
+          Al aprobar la solicitud, eliminamos los datos asociados a tu cuenta en GoTurno, incluyendo:
+        </p>
+        <ul class="mt-5 space-y-2 text-white/70">
+          <li class="flex gap-3"><span class="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Perfil de usuario (nombre, correo, teléfono si aplica)</li>
+          <li class="flex gap-3"><span class="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Reservas/turnos e historial asociado</li>
+          <li class="flex gap-3"><span class="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Datos de negocio (si la cuenta administra un negocio)</li>
+          <li class="flex gap-3"><span class="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--gt-teal)]"></span>Tokens de notificaciones y registros de dispositivo</li>
+        </ul>
+      </div>
+
+      <div class="glass glow rounded-[28px] p-7 md:p-8">
+        <h2 class="text-2xl font-black tracking-tight">Datos que podrían conservarse</h2>
+        <p class="mt-3 text-white/70 leading-relaxed">
+          Por motivos legales, contables o de seguridad, algunos registros pueden conservarse por un tiempo limitado:
+        </p>
+
+        <div class="mt-5 space-y-4 text-white/70">
+          <div class="glass rounded-2xl p-5">
+            <div class="font-extrabold text-white">Facturación / pagos (si aplica)</div>
+            <div class="text-sm text-white/70 mt-1">
+              Registros de pagos o facturación pueden conservarse hasta <span class="font-semibold text-white">5 años</span> (o según normativa aplicable).
+            </div>
+          </div>
+
+          <div class="glass rounded-2xl p-5">
+            <div class="font-extrabold text-white">Seguridad y auditoría</div>
+            <div class="text-sm text-white/70 mt-1">
+              Registros de seguridad (antifraude/auditoría) pueden conservarse hasta <span class="font-semibold text-white">180 días</span>.
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-5 text-xs text-white/50 leading-relaxed">
+          Si tu caso no aplica (por ejemplo, no existen pagos/facturación), ajusta los períodos de retención a tu realidad.
+        </p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="glass glow rounded-[28px] p-7 md:p-8">
+      <h2 class="text-2xl md:text-3xl font-black tracking-tight">Preguntas frecuentes</h2>
+
+      <div class="mt-6 grid md:grid-cols-2 gap-5">
+        <div class="glass rounded-2xl p-6">
+          <div class="font-extrabold">¿Puedo eliminar datos sin borrar la cuenta?</div>
+          <p class="mt-2 text-white/70 text-sm leading-relaxed">
+            Sí. Indícalo en el correo (por ejemplo: eliminar teléfono, dirección o imagen de perfil).
+          </p>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <div class="font-extrabold">¿Qué pasa con mis reservas?</div>
+          <p class="mt-2 text-white/70 text-sm leading-relaxed">
+            Las reservas asociadas a tu cuenta se eliminan, salvo registros mínimos que deban conservarse por motivos legales o de seguridad.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 text-xs text-white/50 leading-relaxed">
+        Operado por <strong class="text-white/70">PORTOSYSTEMS S.A.S.</strong> — Ecuador.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-10 pb-12">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="glass rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <div class="font-extrabold">GoTurno</div>
+          <div class="text-sm text-white/60 mt-1">Reservas y gestión para establecimientos.</div>
+          <div class="text-xs text-white/40 mt-3">© 2026 GoTurno — PORTOSYSTEMS S.A.S. Todos los derechos reservados.</div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-sm text-white/70">
+          <a href="/privacidad.html" class="hover:text-white">Política de privacidad</a>
+          <a href="/terminos.html" class="hover:text-white">Términos</a>
+          <a href="/cookies.html" class="hover:text-white">Cookies</a>
+          <a href="/contacto.html" class="hover:text-white">Contacto</a>
+          <a href="/privacy.html" class="hover:text-white">Privacy (EN)</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const now = new Date();
+    const opts = { year: "numeric", month: "long", day: "2-digit" };
+    document.getElementById("lastUpdated").textContent = now.toLocaleDateString("es-EC", opts);
+  </script>
+</body>
+</html>
