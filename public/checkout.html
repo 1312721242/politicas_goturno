@@ -16,12 +16,14 @@
 
       <div class="mt-6 text-xs text-gray-500 break-all">
         <div>_ptxn: <span id="_ptxn"></span></div>
+        <div>env: <span id="_env"></span></div>
       </div>
     </div>
 
     <script>
       const statusEl = document.getElementById("status");
       const ptxnEl = document.getElementById("_ptxn");
+      const envEl = document.getElementById("_env");
 
       const params = new URLSearchParams(window.location.search);
       const txn = params.get("_ptxn");
@@ -29,6 +31,10 @@
 
       function setStatus(msg) {
         statusEl.textContent = msg;
+      }
+
+      function getParam(name) {
+        return String(params.get(name) || "").trim();
       }
 
       if (!txn) {
@@ -45,10 +51,10 @@
         try {
           setStatus("Inicializando Paddle…");
 
-          // ✅ IMPORTANTE:
-          // Para Billing v2 necesitas inicializar con tu client-side token.
-          // Ejemplo (ajusta con tu token real):
-          // Paddle.Initialize({ token: "YOUR_CLIENT_SIDE_TOKEN" });
+          const clientToken = getParam("_token");
+          const env = getParam("_env").toLowerCase();
+          const customerAuthToken = getParam("_cat");
+          envEl.textContent = env || "(vacío)";
 
           // Si no inicializas, no va a abrir.
           if (!window.Paddle || !window.Paddle.Initialize) {
@@ -56,8 +62,16 @@
             return;
           }
 
-          // ⚠️ DESCOMENTA y coloca tu token real:
-          // window.Paddle.Initialize({ token: "TU_CLIENT_SIDE_TOKEN_AQUI" });
+          if (!clientToken) {
+            setStatus("Falta el token público de Paddle (_token).");
+            return;
+          }
+
+          if (env === "sandbox" && window.Paddle.Environment?.set) {
+            window.Paddle.Environment.set("sandbox");
+          }
+
+          window.Paddle.Initialize({ token: clientToken });
 
           if (!window.Paddle.Checkout || !window.Paddle.Checkout.open) {
             setStatus("Paddle inicializó, pero no existe Paddle.Checkout.open.");
@@ -65,9 +79,23 @@
           }
 
           setStatus("Abriendo checkout…");
-          window.Paddle.Checkout.open({
+          const allowedPaymentMethods = customerAuthToken
+            ? ["saved_payment_methods", "card", "paypal"]
+            : ["card", "paypal"];
+
+          const options = {
             transactionId: txn,
-          });
+            settings: {
+              variant: "one-page",
+              allowedPaymentMethods,
+            },
+          };
+
+          if (customerAuthToken) {
+            options.customerAuthToken = customerAuthToken;
+          }
+
+          window.Paddle.Checkout.open(options);
 
         } catch (e) {
           console.error(e);
